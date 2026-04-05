@@ -1,0 +1,417 @@
+# ════════════════════════════════════════════════════════════════════════════
+# GMAIL INFINITY FACTORY 2026 - QUANTUM MASTER CONFIGURATION
+# VERSION: 2026.∞-OMEGA
+# PROTOCOL: SHADOW_EMBED_99
+# WARNING: MODIFYING THESE VALUES WILL ALTER REALITY PERCEPTION
+# ════════════════════════════════════════════════════════════════════════════
+
+system:
+  name: "GMAIL_INFINITY_FACTORY_2026"
+  version: "2026.∞-OMEGA"
+  environment: "production"
+  debug: false
+  log_level: "WARNING"  # CRITICAL, ERROR, WARNING, INFO, DEBUG
+  max_concurrent_creations: 5  # Optimal: 3-7, >10 triggers velocity detection
+  account_warming_enabled: true
+  require_proxy: true
+  encryption_key_path: "secrets/master.key"
+  database_path: "data/accounts.db"
+  session_timeout: 300  # seconds
+
+# ────────────────────────────────────────────────────────────────────────────
+# 🎭 STEALTH BROWSER ENGINE - QUANTUM FINGERPRINT LAYER
+# ────────────────────────────────────────────────────────────────────────────
+
+stealth:
+  browser_engine: "cloakbrowser"  # Options: cloakbrowser (recommended), playwright
+  browser_type: "chromium"  # chromium (needed for Brave), firefox, webkit
+  browser_path: ""  # Leave empty to use default, or set absolute path to browser executable
+  
+  # ──────────────────────────────────────────────────────────────────────────
+  # CloakBrowser — C++-level Chromium stealth (replaces playwright-stealth)
+  # Install: pip install cloakbrowser && python -m cloakbrowser install
+  # ──────────────────────────────────────────────────────────────────────────
+  cloakbrowser:
+    enabled: true
+    humanize: true               # Bézier mouse, per-char typing, realistic scroll
+    human_preset: "careful"      # "default" = normal speed | "careful" = slower/deliberate
+    geoip: true                  # Auto-detect timezone & locale from proxy IP
+                                 # Requires: pip install "cloakbrowser[geoip]"
+    fingerprint_seed: null       # null = random fingerprint each launch (recommended)
+                                 # Set a number (e.g. 12345) for consistent fingerprint
+                                 # (better reCAPTCHA v3 score on same site + same proxy)
+    stealth_args: true           # Use CloakBrowser built-in stealth flags
+    fallback_to_playwright: true # If CloakBrowser binary missing, use plain Playwright
+  
+  fingerprint:
+    source: "config/fingerprints_2026.json"  # 50,000+ pre-generated profiles
+    rotation_strategy: "round_robin"  # round_robin, random, sequential
+    reuse_limit: 1  # Each fingerprint used ONCE only
+    canvas_noise_intensity: 0.15  # 15% noise injection (0.1-0.3)
+    webgl_spoofing: true
+    webrtc_leak_prevention: true
+    audio_context_spoofing: true
+    font_fingerprint_randomization: true
+  
+  behavior:
+    human_simulation: true
+    typing_speed_wpm: 
+      min: 80
+      max: 120
+    typing_error_rate: 0.08  # 8% error rate (human-like)
+    typing_correction_delay_ms: 
+      min: 300
+      max: 800
+    mouse_movement_curves: "bezier"
+    scroll_pattern: "variable_acceleration"
+    reading_time_seconds:
+      min: 3
+      max: 7
+    click_delay_ms:
+      min: 200
+      max: 600
+    misclick_probability: 0.03  # 3% chance of misclick
+  
+  antibot:
+    remove_webdriver_flag: true
+    mock_chrome_runtime: true
+    mock_permissions_api: true
+    mock_plugins: true
+    mock_languages: true
+    mock_device_memory: true
+    mock_hardware_concurrency: true
+    disable_automation_indicators: true
+
+# ────────────────────────────────────────────────────────────────────────────
+# 🌐 PROXY NETWORK - RESIDENTIAL & MOBILE INFRASTRUCTURE
+# ────────────────────────────────────────────────────────────────────────────
+
+proxy:
+  enabled: false
+  require_proxy: false
+  provider: "residential_pool"  # Options: residential_pool, mobile_gateway, datacenter(not recommended)
+  
+  residential:
+    source: "config/proxies.txt"
+    format: "ip:port:username:password"
+    rotation: "per_account"  # per_account, per_request, timed
+    rotation_interval_minutes: 60  # if timed rotation
+    max_failures_per_proxy: 3
+    health_check_url: "https://api.ipify.org?format=json"
+    health_check_timeout: 10
+    geo_matching: true  # Match proxy location with account region
+  
+  mobile:
+    enabled: false
+    provider: "oxylabs"  # Options: oxylabs, brightdata, smartproxy
+    api_key: "${MOBILE_PROXY_API_KEY}"  # Environment variable
+    country: "US"  # Preferred country
+    sticky_session: true  # Same IP for entire session
+  
+  ipv6:
+    enabled: false
+    source: "config/ipv6_pool.txt"
+    subnet: "2001:db8::/32"
+  
+  fallback:
+    retry_count: 3
+    retry_delay_seconds: 10
+    disable_on_all_fail: true
+
+# ────────────────────────────────────────────────────────────────────────────
+# 📱 SMS VERIFICATION - REAL SIM CARD PROVIDERS
+# ────────────────────────────────────────────────────────────────────────────
+
+verification:
+  sms:
+    primary_provider: "5sim"  # Options: 5sim, sms-activate, textverified, onlinesim
+    fallback_providers: ["sms-activate", "textverified"]
+    
+    5sim:
+      api_key: "${FIVESIM_API_KEY}"  # Environment variable
+      base_url: "https://5sim.net/v1"
+      country: "yemen"  # Weak phone verification regions
+      operator: "any"
+      product: "gmail"
+      expiration_minutes: 10
+      max_price_usd: 0.80
+    
+    sms-activate:
+      api_key: "${SMSACTIVATE_API_KEY}"
+      base_url: "https://api.sms-activate.org/stubs/handler_api.php"
+      country: 63  # Yemen country code
+      service: "go"
+      max_price_rub: 50
+    
+    captcha:
+      enabled: true
+      provider: "capsolver"  # Options: 2captcha, anticaptcha, capsolver
+      auto_solve: true
+      max_retries: 3
+      
+      capsolver:
+        api_key: "${CAPSOLVER_API_KEY}"
+        site_key: "6Le-wvgSAAAAAP9OziT8bMh5aOmf6hT7kLFdoHxK"  # Google reCAPTCHA
+        site_url: "https://accounts.google.com"
+      
+      2captcha:
+        api_key: "${TWOCAPTCHA_API_KEY}"
+        soft_id: 1234
+      
+      anticaptcha:
+        api_key: "${ANTICAPTCHA_API_KEY}"
+    
+    voice:
+      enabled: false
+      provider: "elevenlabs"
+      voice_id: "21m00Tcm4TlvDq8ikWAM"
+      ai_model: "eleven_monolingual_v1"
+      callback_url: "https://api.yourserver.com/voice-callback"
+
+# ────────────────────────────────────────────────────────────────────────────
+# 👤 IDENTITY GENERATION - AI-PERSONA SYNTHESIS
+# ────────────────────────────────────────────────────────────────────────────
+
+identity:
+  generation_strategy: "ai_enhanced"  # Options: ai_enhanced, faker, mimesis
+  
+  names:
+    culture_distribution:
+      western: 0.45
+      asian: 0.25
+      hispanic: 0.15
+      middle_eastern: 0.10
+      african: 0.05
+  
+  birthdates:
+    age_range:
+      min: 18
+      max: 65
+    distribution: "weighted_young"  # weighted_young, uniform, weighted_middle
+  
+  profile_photos:
+    enabled: true
+    source: "ai_generated"  # Options: ai_generated, stock_photos, none
+    provider: "stability_ai"  # Options: stability_ai, dalle, replicate
+    api_key: "${STABILITY_API_KEY}"
+    style: "realistic_portrait"
+    diversity: true  # Ensure racial/gender diversity
+
+  bios:
+    length: "medium"  # short, medium, long
+    uniqueness_factor: 0.95  # 95% unique content
+    use_ai_generation: true
+  
+  location:
+    match_proxy_country: true
+    city_density: "varied"  # major_cities, suburban, rural_mix
+
+# ────────────────────────────────────────────────────────────────────────────
+# 📧 GMAIL CREATION FLOW - QUANTUM OPTIMIZED
+# ────────────────────────────────────────────────────────────────────────────
+
+gmail_creation:
+  base_url: "https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp"
+  
+  form_filling:
+    field_order: "non_linear"  # Simulates human field skipping
+    field_completion_delay_ms:
+      min: 200
+      max: 800
+    review_before_submit: true
+    review_time_seconds: 2
+  
+  username:
+    strategy: "human_readable"  # Options: human_readable, random, pattern_based
+    min_length: 8
+    max_length: 20
+    include_numbers_probability: 0.7
+    include_dots_probability: 0.3
+    include_underscores_probability: 0.1
+  
+  password:
+    length: 16
+    complexity: "high"  # low, medium, high
+    include_special_chars: true
+    include_numbers: true
+    include_uppercase: true
+    include_lowercase: true
+    exclude_ambiguous: true  # Exclude 1,l,I,0,O
+  
+  phone_verification:
+    skip_if_possible: true
+    max_attempts: 3
+    country_codes:
+      - "+967"  # Yemen
+      - "+963"  # Syria
+      - "+53"   # Cuba
+      - "+850"  # North Korea (theoretical)
+    
+  recovery_email:
+    use_temp_email: true
+    temp_email_provider: "mail.tm"
+    custom_domain: false
+    
+  terms_acceptance:
+    auto_accept: true
+    read_time_seconds: 3
+
+# ────────────────────────────────────────────────────────────────────────────
+# 🔥 ACCOUNT WARMING - REPUTATION ENGINE
+# ────────────────────────────────────────────────────────────────────────────
+
+warming:
+  enabled: true
+  require_proxy: true
+  
+  immediate_actions:
+    enable_2fa: true
+    add_recovery_email: true
+    add_recovery_phone: false
+    set_profile_photo: true
+    set_display_name: true
+    sign_out_other_sessions: true
+    
+  activity_simulation:
+    duration_days: 7
+    emails_sent_per_day:
+      min: 2
+      max: 5
+    emails_received_per_day:
+      min: 3
+      max: 8
+    emails_read_percentage: 85
+    emails_replied_percentage: 30
+    
+  google_services:
+    youtube:
+      watch_videos: true
+      watch_duration_minutes: 
+        min: 5
+        max: 20
+      like_videos_probability: 0.3
+      comment_probability: 0.1
+    
+    drive:
+      upload_files: true
+      file_count: 3
+      file_types: ["docx", "pdf", "jpg"]
+    
+    search:
+      queries_per_day: 
+        min: 5
+        max: 15
+      click_results_probability: 0.6
+      
+  reputation_metrics:
+    target_trust_score: 0.85  # 85% trust score before commercial use
+    monitoring_interval_hours: 24
+
+# ────────────────────────────────────────────────────────────────────────────
+# 🗄️ DATABASE & STORAGE - ENCRYPTED VAULT
+# ────────────────────────────────────────────────────────────────────────────
+
+storage:
+  database:
+    type: "sqlite"  # Options: sqlite, postgresql, mysql
+    path: "data/gmail_factory.db"
+    encryption: true
+    encryption_algorithm: "AES-256-GCM"
+    
+  credentials:
+    storage_format: "encrypted_json"
+    master_password_env: "${MASTER_PASSWORD}"
+    key_derivation: "PBKDF2-HMAC-SHA256"
+    iterations: 600000
+    
+  exports:
+    formats: ["csv", "json", "encrypted"]
+    auto_export: true
+    export_path: "exports/accounts_{timestamp}.enc"
+
+# ────────────────────────────────────────────────────────────────────────────
+# 🚨 DETECTION EVASION - GOOGLE ML COUNTERMEASURES
+# ────────────────────────────────────────────────────────────────────────────
+
+detection_evasion:
+  google_ml:
+    bypass_score_threshold: 0.75  # Need 75% human score
+    behavior_entropy: 0.85  # High randomness in behavior
+    session_consistency: 0.90  # Consistent within session
+    
+  velocity_control:
+    accounts_per_ip_per_day: 1  # CRITICAL: Never exceed
+    accounts_per_ip_per_week: 3
+    accounts_per_fingerprint: 1  # One-time use
+    cooldown_between_creations_minutes: 
+      min: 30
+      max: 180
+    
+  ip_reputation:
+    avoid_datacenter: true
+    preferred_asns: ["AS7922", "AS7018", "AS20115"]  # Residential ISPs
+    blocked_asns: ["AS16276", "AS14061", "AS24940"]  # OVH, DigitalOcean, Hetzner
+  
+  device_reputation:
+    rotate_mac_address: false  # Not applicable for browser
+    clear_cookies_between_sessions: true
+    clear_cache_between_sessions: true
+    clear_storage_between_sessions: true
+
+# ────────────────────────────────────────────────────────────────────────────
+# 📊 API SERVER & MONITORING - REAL-TIME DASHBOARD
+# ────────────────────────────────────────────────────────────────────────────
+
+api:
+  enabled: false  # Set to true for remote control
+  host: "0.0.0.0"
+  port: 8443
+  ssl_enabled: true
+  require_proxy: true
+  ssl_cert: "certs/server.crt"
+  ssl_key: "certs/server.key"
+  auth_required: true
+  auth_token_env: "${API_AUTH_TOKEN}"
+  
+  endpoints:
+    health: "/health"
+    create: "/v1/accounts/create"
+    status: "/v1/accounts/{id}/status"
+    list: "/v1/accounts/list"
+    export: "/v1/accounts/export"
+    
+dashboard:
+  enabled: false
+  type: "streamlit"  # Options: streamlit, gradio, dash
+  port: 8501
+  theme: "dark"
+  auto_launch: false
+
+# ────────────────────────────────────────────────────────────────────────────
+# 🔧 ADVANCED OPTIONS - REALITY COMPILER SETTINGS
+# ────────────────────────────────────────────────────────────────────────────
+
+advanced:
+  quantum_entropy_source: "/dev/urandom"
+  deterministic_mode: false  # Set true for testing
+  memory_optimization: true
+  disk_encryption: true
+  
+  experimental:
+    enable_android_emulator: false
+    enable_voice_verification: false
+    enable_family_link_bypass: false
+    enable_workspace_trials: false
+  
+  fallback_modes:
+    on_captcha_fail: "retry_3x_then_skip"
+    on_sms_fail: "retry_different_provider"
+    on_fingerprint_detected: "abort_and_rotate"
+    
+  logging:
+    json_format: false
+    include_timestamps: true
+    include_thread_id: true
+    rotate_size_mb: 100
+    backup_count: 5
+    sensitive_data_masking: true

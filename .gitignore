@@ -1,0 +1,68 @@
+# Build directories
+build/
+cmake-build-*/
+vcpkg_installed/
+
+# Credentials and sensitive data
+credentials/
+*.enc
+*.key
+*.pem
+*.p12
+
+# Logs
+logs/
+*.log
+
+# Output
+output/
+*.csv
+*.json
+*.txt
+
+# IDE files
+.vscode/
+.idea/
+*.vcxproj*
+*.sln
+*.user
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+
+# Python cache (from original project)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Node modules (if any)
+node_modules/
+
+# Package files
+*.zip
+*.tar.gz
+*.rar
+
+# Configuration overrides
+config/local_settings.yaml
+config/production_settings.yaml
